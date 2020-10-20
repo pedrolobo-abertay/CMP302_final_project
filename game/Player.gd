@@ -2,8 +2,9 @@ extends KinematicBody2D
 
 var movement = Vector2()
 var speed = 1000
-var friction = 2000
-var max_speed = 600
+var friction = 1500
+var max_speed = 800
+
 
 func _ready():
 	pass
