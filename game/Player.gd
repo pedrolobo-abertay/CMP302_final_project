@@ -37,7 +37,8 @@ func _process(delta):
 	movement = move_and_slide(movement)
 	
 	
-	
+func take_damage(damage):
+	pass
 	
 	
 	
