@@ -4,7 +4,10 @@ var active = false
 var new_pos
 var speed = 500
 var arena = null
+var player = null
 const EPSLON = 1
+
+signal shoot
 
 func _ready():
 	pass
@@ -28,11 +31,20 @@ func new_position():
 	
 	
 	
-func setup(_arena):
+func setup(_arena, _player):
 	arena = _arena
+	player = _player
 	new_position()
 	
 func _input(event):
 	if event.is_action_pressed("toggle_enemy"):
 		active = not active
+	
+
+
+func _on_Timer_timeout():
+	if not active:
+		return
+	emit_signal("shoot", global_position, \
+	(player.global_position - global_position).normalized())
 	
