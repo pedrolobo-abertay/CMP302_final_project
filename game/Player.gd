@@ -1,13 +1,17 @@
 extends KinematicBody2D
 
+const MOV = preload("res://Potions/MovementPotion.tscn")
+
 var movement = Vector2()
 var speed = 1000
 var friction = 1500
 var max_speed = 800
-
+var new_potion
+var potion_active = false
 
 func _ready():
 	pass
+
 
 func _process(delta):
 	var move_vec = Vector2()
@@ -19,6 +23,8 @@ func _process(delta):
 		move_vec.x -= 1
 	if Input.is_action_pressed("move_right"):
 		move_vec.x += 1
+	if Input.is_action_just_pressed("throw"):
+		throw()
 	
 	if move_vec == Vector2.ZERO:
 		var direction_friction = friction * movement.normalized()
@@ -36,11 +42,30 @@ func _process(delta):
 	
 	movement = move_and_slide(movement)
 	
+	if potion_active:
+		new_potion.position = position
 	
 func take_damage():
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("take_damage")
 	
+func handle_movement_potion():
+	if potion_active:
+		return
+	
+	new_potion = MOV.instance()
+	
+	new_potion.position = position
+	
+	$Potion.add_child(new_potion)
+	
+	potion_active = true
+	
+	
+func throw():
+	potion_active = false
+	var new_direction = (get_global_mouse_position() - position).normalized()
+	new_potion.throw(new_direction)
 	
 	
 	

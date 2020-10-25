@@ -6,6 +6,7 @@ func _ready():
 	$Enemy.setup($Arena, $Player)
 # warning-ignore:return_value_discarded
 	$Enemy.connect("shoot", self, "create_projectile")
+	$MovementPotion.connect("movement_potion", $Player, "handle_movement_potion")
 	
 func create_projectile(_position, _direction):
 	var new_projectile = PROJECTILE.instance()
@@ -16,3 +17,8 @@ func create_projectile(_position, _direction):
 
 func _input(_event):
 	pass
+
+	
+	
+	
+	
