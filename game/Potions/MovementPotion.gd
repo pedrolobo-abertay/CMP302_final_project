@@ -11,16 +11,15 @@ func _ready():
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("player"):
 		emit_signal("movement_potion")
+	if body.is_in_group("wall"):
+		queue_free()
 
+	
 func throw(_direction):
 	
 	direction = _direction
 
 func _process(delta):
 	position += speed * delta * direction
-	
-	
-	
-	
 	
 	

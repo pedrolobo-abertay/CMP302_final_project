@@ -8,6 +8,8 @@ var friction = 1500
 var max_speed = 800
 var new_potion
 var potion_active = false
+var potion_effect_active = false
+var target_position
 
 func _ready():
 	pass
@@ -24,7 +26,10 @@ func _process(delta):
 	if Input.is_action_pressed("move_right"):
 		move_vec.x += 1
 	if Input.is_action_just_pressed("throw") and potion_active:
-		throw1()
+		throw()
+		target_position = get_global_mouse_position()
+	if Input.is_action_just_pressed("drink") and potion_active:
+		drink()
 	
 	if move_vec == Vector2.ZERO:
 		var direction_friction = friction * movement.normalized()
@@ -62,10 +67,17 @@ func handle_movement_potion():
 	potion_active = true
 	
 	
-func throw1():
+func throw():
 	potion_active = false
 	var new_direction = (get_global_mouse_position() - position).normalized()
 	new_potion.throw(new_direction)
 	
-	
-	
+func drink():
+	if not potion_effect_active:
+		$PotionDuration.start()
+		speed = 10000
+		
+
+func _on_PotionDuration_timeout():
+	potion_effect_active = false
+	speed = 1000
