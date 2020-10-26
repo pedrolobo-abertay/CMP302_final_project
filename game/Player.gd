@@ -23,8 +23,8 @@ func _process(delta):
 		move_vec.x -= 1
 	if Input.is_action_pressed("move_right"):
 		move_vec.x += 1
-	if Input.is_action_just_pressed("throw"):
-		throw()
+	if Input.is_action_just_pressed("throw") and potion_active:
+		throw1()
 	
 	if move_vec == Vector2.ZERO:
 		var direction_friction = friction * movement.normalized()
@@ -62,7 +62,7 @@ func handle_movement_potion():
 	potion_active = true
 	
 	
-func throw():
+func throw1():
 	potion_active = false
 	var new_direction = (get_global_mouse_position() - position).normalized()
 	new_potion.throw(new_direction)

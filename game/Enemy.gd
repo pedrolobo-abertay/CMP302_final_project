@@ -25,7 +25,6 @@ func _process(delta):
 		new_position()
 	
 	
-	
 func new_position():
 	new_pos = arena.get_random_position()
 	
