@@ -2,7 +2,9 @@ extends Node2D
 
 const PROJECTILE = preload("res://Projectile.tscn")
 const PATHPOTION = "res://Potions/"
+const EXPLOSION = preload("res://Explosion.tscn")
 var potion_holding
+var new_explosion
 
 func _ready():
 	$Enemy.setup($Arena, $Player)
@@ -32,8 +34,8 @@ func _on_PotionSpawn_get_potion(type):
 	call_deferred("create_potion", type)
 
 	
-func throw(direction):
-	potion_holding.throw(direction)
+func throw(direction, target_position):
+	potion_holding.throw(direction, target_position)
 	potion_holding = null
 
 func drink():
@@ -49,3 +51,21 @@ func create_potion(type):
 	potion_holding.position = $Player.position
 	$Player.potion_active = true
 	potion_holding.setup($Player)
+	
+	potion_holding.connect("explode", self, "create_explosion")
+	
+	
+func create_explosion(target_position, radius, type):
+	print("wtf")
+	new_explosion = EXPLOSION.instance()
+	new_explosion.position = target_position
+	new_explosion.setup(radius, type)
+	
+	$Explosions.add_child(new_explosion)
+	
+	
+	
+	
+	
+	
+	

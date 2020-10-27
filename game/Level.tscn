@@ -38,6 +38,8 @@ position = Vector2( 345.718, 473.679 )
 type = "Movement"
 
 [node name="Potions" type="Node" parent="."]
+
+[node name="Explosions" type="Node" parent="."]
 [connection signal="get_potion" from="PotionsSpawns/PotionSpawn" to="." method="_on_PotionSpawn_get_potion"]
 [connection signal="get_potion" from="PotionsSpawns/PotionSpawn3" to="." method="_on_PotionSpawn_get_potion"]
 [connection signal="get_potion" from="PotionsSpawns/PotionSpawn2" to="." method="_on_PotionSpawn_get_potion"]

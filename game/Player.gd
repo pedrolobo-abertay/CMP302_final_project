@@ -1,20 +1,18 @@
 extends KinematicBody2D
 
 const MOV = preload("res://Potions/Movement.tscn")
+const NORMAL_SPEED = 1000
+const FRICTION = 1500
+const MAX_SPEED = 800
 
 signal throw_potion
 signal drink
 
 var movement = Vector2()
-var speed = 1000
-var friction = 1500
-var max_speed = 800
-var new_potion
+var speed = NORMAL_SPEED
 var potion_active = false
 var potion_effect_active = false
-var target_position
-var potion_type
-var normal_speed = 1000
+
 
 func _ready():
 	pass
@@ -32,8 +30,8 @@ func _process(delta):
 
 	
 	if move_vec == Vector2.ZERO:
-		var direction_friction = friction * movement.normalized()
-		if movement.length() <= friction:
+		var direction_friction = FRICTION * movement.normalized()
+		if movement.length() <= FRICTION:
 			movement = Vector2()
 		else:
 			movement -= direction_friction
@@ -41,9 +39,9 @@ func _process(delta):
 		move_vec = move_vec.normalized()
 		movement += move_vec * speed * delta
 	
-		if movement.length() >= max_speed:
+		if movement.length() >= MAX_SPEED:
 			#movement = movement.normalized() * max_speed
-			movement = movement.clamped(max_speed)
+			movement = movement.clamped(MAX_SPEED)
 	
 	movement = move_and_slide(movement)
 	
@@ -55,7 +53,7 @@ func take_damage():
 func throw():
 	potion_active = false
 	var new_direction = (get_global_mouse_position() - position).normalized()
-	emit_signal("throw_potion", new_direction)
+	emit_signal("throw_potion", new_direction, get_global_mouse_position())
 	
 func drink():
 	potion_active = false
@@ -73,4 +71,4 @@ func speed_up(_speed):
 	$PotionDuration.start()
 
 func _on_PotionDuration_timeout():
-	speed = normal_speed
+	speed = NORMAL_SPEED

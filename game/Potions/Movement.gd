@@ -1,11 +1,17 @@
 extends Node2D
 
+const EPSLON = 1
 const type = "Movement"
 const speed = 1000
+const RADIUS = 100
+
 var direction = Vector2()
 var state = "idle"
 var player = null
 var boost = 5000
+var target_position
+
+signal explode
 
 func _ready():
 	pass 
@@ -18,19 +24,31 @@ func _on_Area2D_body_entered(body):
 		queue_free()
 
 	
-func throw(_direction):
+func throw(_direction, _target_position):
 	state = "throwing"
 	direction = _direction
+	target_position = _target_position
 	
 
 func _process(delta):
 	if state == "throwing":
-		position += speed * delta * direction
+			
+		var mov_direction = (target_position - position).normalized() 
+		
+		var length = min(delta * speed, (target_position - position).length())
+
+		position += mov_direction * length
+			
+		if (position - target_position).length() <= EPSLON:
+			explode()
+	
 	
 func drink():
 	player.speed_up(boost)
 	queue_free()
 	
-	
+func explode():
+	emit_signal("explode", target_position, RADIUS, "stun")
+	queue_free()
 	
 	
