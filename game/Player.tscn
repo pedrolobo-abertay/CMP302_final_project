@@ -40,8 +40,6 @@ texture = ExtResource( 1 )
 anims/idle = SubResource( 2 )
 anims/take_damage = SubResource( 3 )
 
-[node name="Potion" type="Node" parent="."]
-
 [node name="PotionDuration" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true

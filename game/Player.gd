@@ -1,6 +1,9 @@
 extends KinematicBody2D
 
-const MOV = preload("res://Potions/MovementPotion.tscn")
+const MOV = preload("res://Potions/Movement.tscn")
+
+signal throw_potion
+signal drink
 
 var movement = Vector2()
 var speed = 1000
@@ -10,10 +13,11 @@ var new_potion
 var potion_active = false
 var potion_effect_active = false
 var target_position
+var potion_type
+var normal_speed = 1000
 
 func _ready():
 	pass
-
 
 func _process(delta):
 	var move_vec = Vector2()
@@ -25,11 +29,7 @@ func _process(delta):
 		move_vec.x -= 1
 	if Input.is_action_pressed("move_right"):
 		move_vec.x += 1
-	if Input.is_action_just_pressed("throw") and potion_active:
-		throw()
-		target_position = get_global_mouse_position()
-	if Input.is_action_just_pressed("drink") and potion_active:
-		drink()
+
 	
 	if move_vec == Vector2.ZERO:
 		var direction_friction = friction * movement.normalized()
@@ -47,37 +47,30 @@ func _process(delta):
 	
 	movement = move_and_slide(movement)
 	
-	if potion_active:
-		new_potion.position = position
-	
 func take_damage():
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("take_damage")
-	
-func handle_movement_potion():
-	if potion_active:
-		return
-	
-	new_potion = MOV.instance()
-	
-	new_potion.position = position
-	
-	$Potion.add_child(new_potion)
-	
-	potion_active = true
 	
 	
 func throw():
 	potion_active = false
 	var new_direction = (get_global_mouse_position() - position).normalized()
-	new_potion.throw(new_direction)
+	emit_signal("throw_potion", new_direction)
 	
 func drink():
-	if not potion_effect_active:
-		$PotionDuration.start()
-		speed = 10000
+	potion_active = false
+	emit_signal("drink")
 		
 
+func _input(event):
+	if event.is_action_pressed("throw") and potion_active:
+		throw()
+	if event.is_action_pressed("drink") and potion_active:
+		drink()
+
+func speed_up(_speed):
+	speed = _speed
+	$PotionDuration.start()
+
 func _on_PotionDuration_timeout():
-	potion_effect_active = false
-	speed = 1000
+	speed = normal_speed

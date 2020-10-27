@@ -1,12 +1,16 @@
 extends Node2D
 
 const PROJECTILE = preload("res://Projectile.tscn")
+const PATHPOTION = "res://Potions/"
+var potion_holding
 
 func _ready():
 	$Enemy.setup($Arena, $Player)
 # warning-ignore:return_value_discarded
 	$Enemy.connect("shoot", self, "create_projectile")
-	$MovementPotion.connect("movement_potion", $Player, "handle_movement_potion")
+# warning-ignore:return_value_discarded
+	$Player.connect("throw_potion", self, "throw")
+	$Player.connect("drink", self, "drink")
 	
 func create_projectile(_position, _direction):
 	var new_projectile = PROJECTILE.instance()
@@ -19,6 +23,29 @@ func _input(_event):
 	pass
 
 	
+func _process(_delta):
+	if potion_holding:
+		potion_holding.position = $Player.position
 	
+
+func _on_PotionSpawn_get_potion(type):	
+	call_deferred("create_potion", type)
+
 	
-	
+func throw(direction):
+	potion_holding.throw(direction)
+	potion_holding = null
+
+func drink():
+	potion_holding.drink()
+	potion_holding = null
+
+func create_potion(type):
+	if potion_holding and potion_holding.type == type:
+		return
+	var path_potion = PATHPOTION+type+".tscn"
+	potion_holding = load(path_potion).instance()
+	$Potions.add_child(potion_holding)
+	potion_holding.position = $Player.position
+	$Player.potion_active = true
+	potion_holding.setup($Player)

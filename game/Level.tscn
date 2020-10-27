@@ -4,7 +4,7 @@
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Level.gd" type="Script" id=4]
-[ext_resource path="res://Potions/MovementPotion.tscn" type="PackedScene" id=5]
+[ext_resource path="res://PotionSpawn.tscn" type="PackedScene" id=6]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 4 )
@@ -19,5 +19,26 @@ position = Vector2( 964, 514 )
 
 [node name="Projectiles" type="Node" parent="."]
 
-[node name="MovementPotion" parent="." instance=ExtResource( 5 )]
-position = Vector2( 355.98, 368.693 )
+[node name="PotionsSpawns" type="Node" parent="."]
+
+[node name="PotionSpawn" parent="PotionsSpawns" instance=ExtResource( 6 )]
+position = Vector2( 347.963, 276.126 )
+type = "Movement"
+
+[node name="PotionSpawn3" parent="PotionsSpawns" instance=ExtResource( 6 )]
+position = Vector2( 350.208, 801.438 )
+type = "Movement"
+
+[node name="PotionSpawn2" parent="PotionsSpawns" instance=ExtResource( 6 )]
+position = Vector2( 336.739, 648.783 )
+type = "Movement"
+
+[node name="PotionSpawn4" parent="PotionsSpawns" instance=ExtResource( 6 )]
+position = Vector2( 345.718, 473.679 )
+type = "Movement"
+
+[node name="Potions" type="Node" parent="."]
+[connection signal="get_potion" from="PotionsSpawns/PotionSpawn" to="." method="_on_PotionSpawn_get_potion"]
+[connection signal="get_potion" from="PotionsSpawns/PotionSpawn3" to="." method="_on_PotionSpawn_get_potion"]
+[connection signal="get_potion" from="PotionsSpawns/PotionSpawn2" to="." method="_on_PotionSpawn_get_potion"]
+[connection signal="get_potion" from="PotionsSpawns/PotionSpawn4" to="." method="_on_PotionSpawn_get_potion"]
