@@ -56,7 +56,6 @@ func create_potion(type):
 	
 	
 func create_explosion(target_position, radius, type):
-	print("wtf")
 	new_explosion = EXPLOSION.instance()
 	new_explosion.position = target_position
 	new_explosion.setup(radius, type)

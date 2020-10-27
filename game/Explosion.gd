@@ -7,7 +7,7 @@ func setup(_radius, _type):
 	type = _type
 
 func _on_Area2D_area_entered(area):
-	if area.is_in_group("enemy"):
+	if area.get_parent().is_in_group("enemy"):
 		if type == "stun":
 			pass
 		if type == "damage":
