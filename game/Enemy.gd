@@ -5,6 +5,7 @@ var new_pos
 var speed = 500
 var arena = null
 var player = null
+var stunned = false
 const EPSLON = 1
 
 signal shoot
@@ -13,10 +14,10 @@ func _ready():
 	pass
 
 func _process(delta):
-	if not new_pos or not active:
+	if not new_pos or not active or stunned:
 		return
+		
 	var mov_direction = (new_pos - position).normalized() 
-	
 	var length = min(delta * speed, (new_pos - position).length())
 
 	position += mov_direction * length
@@ -42,8 +43,20 @@ func _input(event):
 
 
 func _on_Timer_timeout():
-	if not active:
+	if not active or stunned:
 		return
 	emit_signal("shoot", global_position, \
 	(player.global_position - global_position).normalized())
 	
+func stun(time):
+	if stunned:
+		return
+	stunned =  true
+	
+	yield(get_tree().create_timer(time), "timeout")
+	
+	stunned = false
+	
+	
+	
+

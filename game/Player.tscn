@@ -43,4 +43,6 @@ anims/take_damage = SubResource( 3 )
 [node name="PotionDuration" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="timeout" from="PotionDuration" to="." method="_on_PotionDuration_timeout"]

@@ -12,6 +12,7 @@ func _ready():
 	$Enemy.connect("shoot", self, "create_projectile")
 # warning-ignore:return_value_discarded
 	$Player.connect("throw_potion", self, "throw")
+# warning-ignore:return_value_discarded
 	$Player.connect("drink", self, "drink")
 	
 func create_projectile(_position, _direction):
@@ -55,10 +56,10 @@ func create_potion(type):
 	potion_holding.connect("explode", self, "create_explosion")
 	
 	
-func create_explosion(target_position, radius, type):
+func create_explosion(target_position, radius, type, value):
 	new_explosion = EXPLOSION.instance()
 	new_explosion.position = target_position
-	new_explosion.setup(radius, type)
+	new_explosion.setup(radius, type, value)
 	
 	$Explosions.add_child(new_explosion)
 	

@@ -12,12 +12,18 @@ var movement = Vector2()
 var speed = NORMAL_SPEED
 var potion_active = false
 var potion_effect_active = false
-
+var can_dash = false
+var dash_force = 5000
+var dash_vec = Vector2()
 
 func _ready():
 	pass
 
 func _process(delta):
+	if dash_vec != Vector2():
+		move_and_slide(dash_vec)
+		return
+	
 	var move_vec = Vector2()
 	if Input.is_action_pressed("move_top"):
 		move_vec.y -= 1
@@ -65,10 +71,26 @@ func _input(event):
 		throw()
 	if event.is_action_pressed("drink") and potion_active:
 		drink()
-
+	if event.is_action_pressed("dash") and can_dash:
+		dash()
+		
 func speed_up(_speed):
 	speed = _speed
 	$PotionDuration.start()
 
 func _on_PotionDuration_timeout():
 	speed = NORMAL_SPEED
+
+func enable_dash(time):
+	can_dash = true
+	yield(get_tree().create_timer(time), "timeout")
+	can_dash = false
+	
+func dash():
+	if dash_vec != Vector2():
+		return
+	var direction = (get_global_mouse_position() - position).normalized()
+	movement = Vector2()
+	$Tween.interpolate_property(self, "dash_vec", direction * dash_force, Vector2(), 0.3, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	$Tween.start()
+

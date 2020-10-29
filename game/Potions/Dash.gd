@@ -1,14 +1,13 @@
 extends Node2D
 
 const EPSLON = 1
-const type = "Movement"
-const speed = 1000
+const type = "Dash"
 const RADIUS = 100
+const SPEED = 1000
 
 var direction = Vector2()
 var state = "idle"
 var player = null
-var boost = 5000
 var target_position
 
 signal explode
@@ -35,7 +34,7 @@ func _process(delta):
 			
 		var mov_direction = (target_position - position).normalized() 
 		
-		var length = min(delta * speed, (target_position - position).length())
+		var length = min(delta * SPEED, (target_position - position).length())
 
 		position += mov_direction * length
 			
@@ -44,11 +43,9 @@ func _process(delta):
 	
 	
 func drink():
-	player.speed_up(boost)
+	player.enable_dash(10)
 	queue_free()
 	
 func explode():
-	emit_signal("explode", target_position, RADIUS, "stun", 5)
+	emit_signal("explode", target_position, RADIUS, "damage", 5)
 	queue_free()
-	
-	
