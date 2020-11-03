@@ -11,36 +11,31 @@ script = ExtResource( 4 )
 
 [node name="Arena" parent="." instance=ExtResource( 1 )]
 
+[node name="Projectiles" type="Node" parent="."]
+
+[node name="PotionsSpawns" type="Node" parent="."]
+
+[node name="PotionSpawn" parent="PotionsSpawns" instance=ExtResource( 6 )]
+position = Vector2( 319.454, 276.126 )
+type = "Movement"
+
+[node name="PotionSpawn2" parent="PotionsSpawns" instance=ExtResource( 6 )]
+position = Vector2( 319.794, 745 )
+type = "Invunerability"
+
+[node name="PotionSpawn4" parent="PotionsSpawns" instance=ExtResource( 6 )]
+position = Vector2( 320.336, 523.605 )
+type = "Dash"
+
+[node name="Potions" type="Node" parent="."]
+
 [node name="Enemy" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1453.36, 507.926 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 964, 514 )
 
-[node name="Projectiles" type="Node" parent="."]
-
-[node name="PotionsSpawns" type="Node" parent="."]
-
-[node name="PotionSpawn" parent="PotionsSpawns" instance=ExtResource( 6 )]
-position = Vector2( 347.963, 276.126 )
-type = "Movement"
-
-[node name="PotionSpawn3" parent="PotionsSpawns" instance=ExtResource( 6 )]
-position = Vector2( 344.208, 797.438 )
-type = "Movement"
-
-[node name="PotionSpawn2" parent="PotionsSpawns" instance=ExtResource( 6 )]
-position = Vector2( 344.739, 648.783 )
-type = "Movement"
-
-[node name="PotionSpawn4" parent="PotionsSpawns" instance=ExtResource( 6 )]
-position = Vector2( 341.718, 457.679 )
-type = "Dash"
-
-[node name="Potions" type="Node" parent="."]
-
 [node name="Explosions" type="Node" parent="."]
 [connection signal="get_potion" from="PotionsSpawns/PotionSpawn" to="." method="_on_PotionSpawn_get_potion"]
-[connection signal="get_potion" from="PotionsSpawns/PotionSpawn3" to="." method="_on_PotionSpawn_get_potion"]
 [connection signal="get_potion" from="PotionsSpawns/PotionSpawn2" to="." method="_on_PotionSpawn_get_potion"]
 [connection signal="get_potion" from="PotionsSpawns/PotionSpawn4" to="." method="_on_PotionSpawn_get_potion"]
