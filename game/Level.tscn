@@ -36,6 +36,8 @@ position = Vector2( 1453.36, 507.926 )
 position = Vector2( 964, 514 )
 
 [node name="Explosions" type="Node" parent="."]
+
+[node name="Barriers" type="Node" parent="."]
 [connection signal="get_potion" from="PotionsSpawns/PotionSpawn" to="." method="_on_PotionSpawn_get_potion"]
 [connection signal="get_potion" from="PotionsSpawns/PotionSpawn4" to="." method="_on_PotionSpawn_get_potion"]
 [connection signal="get_potion" from="PotionsSpawns/PotionSpawn2" to="." method="_on_PotionSpawn_get_potion"]

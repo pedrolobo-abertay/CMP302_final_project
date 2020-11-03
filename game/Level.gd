@@ -3,8 +3,8 @@ extends Node2D
 const PROJECTILE = preload("res://Projectile.tscn")
 const PATHPOTION = "res://Potions/"
 const EXPLOSION = preload("res://Explosion.tscn")
+const BARRIER = preload("res://Barrier.tscn")
 var potion_holding
-var new_explosion
 
 func _ready():
 	$Enemy.setup($Arena, $Player)
@@ -56,19 +56,25 @@ func create_potion(type):
 	$Player.potion_active = true
 	potion_holding.setup($Player)
 	
-	potion_holding.connect("explode", self, "create_explosion")
-	
+	if type == "Invincibility":
+		potion_holding.connect("barrier", self, "create_barrier")
+	else:
+		potion_holding.connect("explode", self, "create_explosion")
 	
 func create_explosion(target_position, radius, type, value):
-	new_explosion = EXPLOSION.instance()
+	var new_explosion = EXPLOSION.instance()
 	new_explosion.position = target_position
 	new_explosion.setup(radius, type, value)
 	
 	$Explosions.add_child(new_explosion)
 	
 	
+func create_barrier(target_position, time):
+	var new_barrier = BARRIER.instance()
+	new_barrier.position = target_position
+	new_barrier.setup(time)
 	
-	
+	$Barriers.add_child(new_barrier)
 	
 	
 	

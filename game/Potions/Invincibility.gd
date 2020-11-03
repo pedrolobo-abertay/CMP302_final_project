@@ -11,7 +11,7 @@ var state = "idle"
 var player = null
 var target_position
 
-signal explode
+signal barrier
 
 func setup(_player):
 	player = _player
@@ -45,6 +45,6 @@ func drink():
 	queue_free()
 	
 func explode():
-	emit_signal("explode", target_position, RADIUS, "damage", 5)
+	emit_signal("barrier", target_position, 5)
 	queue_free()
 
