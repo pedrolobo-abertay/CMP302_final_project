@@ -65,7 +65,8 @@ func create_potion(type):
 		potion_holding.connect("barrier", self, "create_barrier")
 	else:
 		potion_holding.connect("explode", self, "create_explosion")
-	
+		
+	potion_holding.connect("new_buff", $UI, "add_buff")
 func create_explosion(target_position, radius, type, value):
 	var new_explosion = EXPLOSION.instance()
 	new_explosion.position = target_position

@@ -45,6 +45,7 @@ func _process(delta):
 	
 func drink():
 	player.speed_up(boost)
+	emit_signal("new_buff", type, 5)
 	queue_free()
 	
 func explode():

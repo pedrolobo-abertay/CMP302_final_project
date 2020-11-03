@@ -12,6 +12,7 @@ var player = null
 var target_position
 
 signal barrier
+signal new_buff
 
 func setup(_player):
 	player = _player
@@ -42,6 +43,7 @@ func _process(delta):
 	
 func drink():
 	player.invincibility(TIME_INVIN)
+	emit_signal("new_buff", type, TIME_INVIN)
 	queue_free()
 	
 func explode():

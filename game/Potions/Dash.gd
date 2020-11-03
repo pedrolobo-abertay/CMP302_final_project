@@ -11,6 +11,7 @@ var player = null
 var target_position
 
 signal explode
+signal new_buff
 
 func _ready():
 	pass 
@@ -44,6 +45,7 @@ func _process(delta):
 	
 func drink():
 	player.enable_dash(10)
+	emit_signal("new_buff", type, 10)
 	queue_free()
 	
 func explode():
