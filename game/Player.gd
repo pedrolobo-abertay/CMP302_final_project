@@ -15,6 +15,7 @@ var potion_effect_active = false
 var can_dash = false
 var dash_force = 5000
 var dash_vec = Vector2()
+var invincible = false
 
 func _ready():
 	pass
@@ -53,6 +54,8 @@ func _process(delta):
 	movement = move_and_slide(movement)
 	
 func take_damage():
+	if invincible:
+		return
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("take_damage")
 	
@@ -95,3 +98,9 @@ func dash():
 	$Tween.interpolate_property(self, "dash_vec", direction * dash_force, Vector2(), 0.3, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	$Tween.start()
 
+func invincibility(value):
+	if invincible:
+		return
+	invincible = true
+	yield(get_tree().create_timer(value), "timeout")
+	invincible = false

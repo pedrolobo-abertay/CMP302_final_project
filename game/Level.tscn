@@ -15,13 +15,13 @@ script = ExtResource( 4 )
 position = Vector2( 319.454, 276.126 )
 type = "Movement"
 
-[node name="PotionSpawn2" parent="PotionsSpawns" instance=ExtResource( 6 )]
-position = Vector2( 319.794, 745 )
-type = "Invunerability"
-
 [node name="PotionSpawn4" parent="PotionsSpawns" instance=ExtResource( 6 )]
 position = Vector2( 320.336, 523.605 )
 type = "Dash"
+
+[node name="PotionSpawn2" parent="PotionsSpawns" instance=ExtResource( 6 )]
+position = Vector2( 319.794, 745 )
+type = "Invincibility"
 
 [node name="Arena" parent="." instance=ExtResource( 1 )]
 
@@ -37,5 +37,5 @@ position = Vector2( 964, 514 )
 
 [node name="Explosions" type="Node" parent="."]
 [connection signal="get_potion" from="PotionsSpawns/PotionSpawn" to="." method="_on_PotionSpawn_get_potion"]
-[connection signal="get_potion" from="PotionsSpawns/PotionSpawn2" to="." method="_on_PotionSpawn_get_potion"]
 [connection signal="get_potion" from="PotionsSpawns/PotionSpawn4" to="." method="_on_PotionSpawn_get_potion"]
+[connection signal="get_potion" from="PotionsSpawns/PotionSpawn2" to="." method="_on_PotionSpawn_get_potion"]

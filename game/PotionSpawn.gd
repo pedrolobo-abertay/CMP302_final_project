@@ -11,7 +11,7 @@ func _ready():
 	elif type == "Dash":
 		$Sprite.texture = load("res://Assets/green_square.png")
 		$SpritePotion.texture = load("res://Assets/green_potion.png")
-	elif type == "Invunerability":
+	elif type == "Invincibility":
 		$Sprite.texture = load("res://Assets/blue_square.png")
 		$SpritePotion.texture = load("res://Assets/blue_potion.png")
 
