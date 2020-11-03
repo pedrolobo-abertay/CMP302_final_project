@@ -47,6 +47,8 @@ func drink():
 func create_potion(type):
 	if potion_holding and potion_holding.type == type:
 		return
+	elif potion_holding:
+		potion_holding.queue_free()
 	var path_potion = PATHPOTION+type+".tscn"
 	potion_holding = load(path_potion).instance()
 	$Potions.add_child(potion_holding)
