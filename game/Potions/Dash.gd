@@ -2,7 +2,7 @@ extends Node2D
 
 const EPSLON = 1
 const type = "Dash"
-const RADIUS = 100
+const RADIUS = 80
 const SPEED = 1000
 
 var direction = Vector2()

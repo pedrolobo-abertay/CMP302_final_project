@@ -13,7 +13,7 @@ func _on_Area2D_area_entered(area):
 		if type == "stun":
 			area.get_parent().stun(value)
 		if type == "damage":
-			pass
+			area.get_parent().damage()
 
-func _on_Timer_timeout():
+func _on_AnimationPlayer_animation_finished(anim_name):
 	queue_free()

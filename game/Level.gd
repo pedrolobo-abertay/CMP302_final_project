@@ -15,6 +15,7 @@ func _ready():
 # warning-ignore:return_value_discarded
 	$Player.connect("drink", self, "drink")
 	
+	
 func create_projectile(_position, _direction):
 	var new_projectile = PROJECTILE.instance()
 	

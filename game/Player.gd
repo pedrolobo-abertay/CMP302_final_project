@@ -21,6 +21,7 @@ func _ready():
 
 func _process(delta):
 	if dash_vec != Vector2():
+# warning-ignore:return_value_discarded
 		move_and_slide(dash_vec)
 		return
 	

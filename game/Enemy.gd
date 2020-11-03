@@ -2,7 +2,7 @@ extends Node2D
 
 var active = false
 var new_pos
-var speed = 500
+var speed = 300
 var arena = null
 var player = null
 var stunned = false
@@ -57,6 +57,8 @@ func stun(time):
 	
 	stunned = false
 	
-	
+func damage():
+	$AnimationPlayer.stop()
+	$AnimationPlayer.play("Damage")
 	
 

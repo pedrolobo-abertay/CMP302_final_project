@@ -3,7 +3,7 @@ extends Node2D
 const EPSLON = 1
 const type = "Movement"
 const speed = 1000
-const RADIUS = 100
+const RADIUS = 80
 
 var direction = Vector2()
 var state = "idle"
