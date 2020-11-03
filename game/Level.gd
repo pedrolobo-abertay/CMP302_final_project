@@ -37,10 +37,12 @@ func _on_PotionSpawn_get_potion(type):
 
 	
 func throw(direction, target_position):
+	$UI.change_potion("None")
 	potion_holding.throw(direction, target_position)
 	potion_holding = null
 
 func drink():
+	$UI.change_potion("None")
 	potion_holding.drink()
 	potion_holding = null
 
@@ -49,6 +51,9 @@ func create_potion(type):
 		return
 	elif potion_holding:
 		potion_holding.queue_free()
+	
+	$UI.change_potion(type)
+		
 	var path_potion = PATHPOTION+type+".tscn"
 	potion_holding = load(path_potion).instance()
 	$Potions.add_child(potion_holding)
