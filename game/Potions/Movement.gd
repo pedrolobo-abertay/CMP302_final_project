@@ -12,6 +12,7 @@ var boost = 5000
 var target_position
 
 signal explode
+signal new_buff
 
 func _ready():
 	pass 

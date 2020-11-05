@@ -4,25 +4,24 @@
 [ext_resource path="res://Style/BuffBarBlue.tres" type="StyleBox" id=2]
 [ext_resource path="res://BuffBar.gd" type="Script" id=3]
 
-[sub_resource type="StyleBoxEmpty" id=2]
+[sub_resource type="StyleBoxEmpty" id=1]
 
 [node name="BuffBar" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 24.0271
-margin_top = 178.869
-margin_right = 24.0271
-margin_bottom = 178.869
+margin_right = -1920.0
+margin_bottom = -1080.0
+rect_min_size = Vector2( 350, 50 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-margin_right = 347.0
+margin_right = 350.0
 margin_bottom = 50.0
 custom_styles/fg = ExtResource( 2 )
-custom_styles/bg = SubResource( 2 )
+custom_styles/bg = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 value = 100.0
 percent_visible = false
