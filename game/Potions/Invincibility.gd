@@ -43,7 +43,7 @@ func _process(delta):
 	
 func drink():
 	player.invincibility(TIME_INVIN)
-	emit_signal("new_buff", type, TIME_INVIN)
+	emit_signal("new_buff", type, TIME_INVIN, "imune to damage")
 	queue_free()
 	
 func explode():

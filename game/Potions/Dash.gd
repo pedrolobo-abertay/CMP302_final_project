@@ -45,7 +45,7 @@ func _process(delta):
 	
 func drink():
 	player.enable_dash(10)
-	emit_signal("new_buff", type, 10)
+	emit_signal("new_buff", type, 10, "dash with spacebar")
 	queue_free()
 	
 func explode():
