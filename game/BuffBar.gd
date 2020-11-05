@@ -4,7 +4,8 @@ var type
 var time
 
 func _ready():
-	pass 
+	$Tween.interpolate_property($ProgressBar, "value", 100, 0, time, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Tween.start()
 
 func setup(_type, _time):
 	type = _type
@@ -18,3 +19,7 @@ func setup(_type, _time):
 	elif type == "Invincibility":
 		$Sprite.texture = load("res://Assets/blue_potion.png")
 		$ProgressBar.add_stylebox_override("fg", load("res://Style/BuffBarBlue.tres"))	
+
+
+func _on_Tween_tween_all_completed():
+	queue_free()

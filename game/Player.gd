@@ -79,16 +79,15 @@ func _input(event):
 		dash()
 		
 func speed_up(_speed):
+	$TimerMov.stop()
 	speed = _speed
-	$PotionDuration.start()
-
-func _on_PotionDuration_timeout():
-	speed = NORMAL_SPEED
+	$TimerMov.start()
 
 func enable_dash(time):
+	$TimerDash.stop()
 	can_dash = true
-	yield(get_tree().create_timer(time), "timeout")
-	can_dash = false
+	$TimerDash.start(time)
+	
 	
 func dash():
 	if dash_vec != Vector2():
@@ -99,8 +98,20 @@ func dash():
 	$Tween.start()
 
 func invincibility(value):
-	if invincible:
-		return
+	$TimerInvin.stop()
+	
 	invincible = true
-	yield(get_tree().create_timer(value), "timeout")
+	
+	$TimerInvin.start(value)
+
+
+func _on_TimerDash_timeout():
+	can_dash = false
+
+
+func _on_TimerInvin_timeout():
 	invincible = false
+
+
+func _on_TimerMov_timeout():
+	 speed = NORMAL_SPEED

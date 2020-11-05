@@ -40,9 +40,15 @@ texture = ExtResource( 1 )
 anims/idle = SubResource( 2 )
 anims/take_damage = SubResource( 3 )
 
-[node name="PotionDuration" type="Timer" parent="."]
+[node name="TimerMov" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
 
 [node name="Tween" type="Tween" parent="."]
-[connection signal="timeout" from="PotionDuration" to="." method="_on_PotionDuration_timeout"]
+
+[node name="TimerDash" type="Timer" parent="."]
+
+[node name="TimerInvin" type="Timer" parent="."]
+[connection signal="timeout" from="TimerMov" to="." method="_on_TimerMov_timeout"]
+[connection signal="timeout" from="TimerDash" to="." method="_on_TimerDash_timeout"]
+[connection signal="timeout" from="TimerInvin" to="." method="_on_TimerInvin_timeout"]
