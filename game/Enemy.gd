@@ -40,7 +40,7 @@ func _input(event):
 	
 
 func _on_Timer_timeout():
-	if not active or stunned:
+	if not active or stunned or not player:
 		return
 	emit_signal("shoot", global_position, \
 	(player.global_position - global_position).normalized())
@@ -58,4 +58,13 @@ func damage():
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("Damage")
 	
-
+func player_died():
+	player = null
+	
+	
+	
+	
+	
+	
+	
+	

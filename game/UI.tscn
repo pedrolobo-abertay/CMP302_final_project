@@ -20,7 +20,7 @@ margin_left = 57.0
 margin_top = 1016.0
 margin_right = 675.0
 margin_bottom = 1064.0
-custom_constants/separation = 300
+custom_constants/separation = 150
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -35,8 +35,8 @@ __meta__ = {
 }
 
 [node name="DrinkEffect" type="Label" parent="HBoxContainer"]
-margin_left = 663.0
-margin_right = 778.0
+margin_left = 513.0
+margin_right = 628.0
 margin_bottom = 48.0
 custom_fonts/font = ExtResource( 2 )
 text = "Drink: "
@@ -45,11 +45,21 @@ __meta__ = {
 }
 
 [node name="ThrowEffect" type="Label" parent="HBoxContainer"]
-margin_left = 1078.0
-margin_right = 1195.0
+margin_left = 778.0
+margin_right = 895.0
 margin_bottom = 48.0
 custom_fonts/font = ExtResource( 2 )
 text = "Throw:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+margin_left = 800.398
+margin_top = 7.53671
+margin_right = 1130.4
+margin_bottom = 71.5367
+value = 100.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

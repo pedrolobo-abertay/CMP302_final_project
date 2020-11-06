@@ -7,6 +7,8 @@ const MAX_SPEED = 800
 
 signal throw_potion
 signal drink
+signal health
+signal died
 
 var movement = Vector2()
 var speed = NORMAL_SPEED
@@ -16,6 +18,7 @@ var can_dash = false
 var dash_force = 5000
 var dash_vec = Vector2()
 var invincible = false
+var health = 100
 
 func _ready():
 	pass
@@ -53,12 +56,15 @@ func _process(delta):
 	
 	movement = move_and_slide(movement)
 	
-func take_damage():
+func take_damage(damage):
 	if invincible:
 		return
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("take_damage")
-	
+	emit_signal("health", health)
+	health -= damage
+	if health <=0:
+		die()
 	
 func throw():
 	potion_active = false
@@ -115,3 +121,11 @@ func _on_TimerInvin_timeout():
 
 func _on_TimerMov_timeout():
 	 speed = NORMAL_SPEED
+
+func die():
+	emit_signal("died")
+	queue_free()
+
+
+
+
