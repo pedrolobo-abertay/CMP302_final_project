@@ -34,8 +34,8 @@ func add_buff(type, time, text):
 	new_buff.setup(type, time, text)
 	$Effects.add_child(new_buff)
 
-func update_health():	
-	pass
+func update_health(health):	
+	$HealthBar.value = health
 	
 	
 	

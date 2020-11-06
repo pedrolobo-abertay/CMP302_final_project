@@ -109,7 +109,6 @@ func die_player():
 func create_player():
 	player = PLAYER.instance()
 	player.position = Vector2(500, 500)
-	$PlayerPlace.add_child(player)
 	$Enemy.setup($Arena, player)
 # warning-ignore:return_value_discarded
 	player.connect("throw_potion", self, "throw")
@@ -119,8 +118,9 @@ func create_player():
 	player.connect("died", self, "die_player")
 # warning-ignore:return_value_discarded
 	player.connect("died", $Enemy, "player_died")
-	
-	
+# warning-ignore:return_value_discarded
+	player.connect("health", $UI, "update_health")	
+	$PlayerPlace.add_child(player)
 
 
 

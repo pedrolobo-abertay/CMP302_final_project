@@ -21,7 +21,7 @@ var invincible = false
 var health = 100
 
 func _ready():
-	pass
+	emit_signal("health", health)
 
 func _process(delta):
 	if dash_vec != Vector2():
@@ -61,8 +61,9 @@ func take_damage(damage):
 		return
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("take_damage")
-	emit_signal("health", health)
+
 	health -= damage
+	emit_signal("health", health)
 	if health <=0:
 		die()
 	
