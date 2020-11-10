@@ -97,6 +97,7 @@ func create_barrier(target_position, time):
 	$Barriers.add_child(new_barrier)
 	
 func die_player():
+	$UI.change_potion("None", null, null)
 	player = null
 	if potion_holding:
 		potion_holding.queue_free()
