@@ -10,6 +10,8 @@ var state = "idle"
 var player = null
 var boost = 5000
 var target_position
+var boost_time = 5
+var stun_time = 5
 
 signal explode
 signal new_buff
@@ -46,11 +48,11 @@ func _process(delta):
 	
 func drink():
 	player.speed_up(boost)
-	emit_signal("new_buff", type, 5, "increased speed")
+	emit_signal("new_buff", type, boost_time, "increased speed")
 	queue_free()
 	
 func explode():
-	emit_signal("explode", target_position, RADIUS, "stun", 5)
+	emit_signal("explode", target_position, RADIUS, "stun", stun_time)
 	queue_free()
 	
 	

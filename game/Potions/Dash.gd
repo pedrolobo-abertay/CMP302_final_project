@@ -9,6 +9,8 @@ var direction = Vector2()
 var state = "idle"
 var player = null
 var target_position
+var damage = 5
+var dash_time = 10
 
 signal explode
 signal new_buff
@@ -45,9 +47,9 @@ func _process(delta):
 	
 func drink():
 	player.enable_dash(10)
-	emit_signal("new_buff", type, 10, "dash with spacebar")
+	emit_signal("new_buff", type, dash_time, "dash with spacebar")
 	queue_free()
 	
 func explode():
-	emit_signal("explode", target_position, RADIUS, "damage", 5)
+	emit_signal("explode", target_position, RADIUS, "damage", damage)
 	queue_free()

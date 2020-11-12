@@ -10,6 +10,7 @@ var direction = Vector2()
 var state = "idle"
 var player = null
 var target_position
+var barrier_time = 5
 
 signal barrier
 signal new_buff
@@ -47,6 +48,6 @@ func drink():
 	queue_free()
 	
 func explode():
-	emit_signal("barrier", target_position, 5)
+	emit_signal("barrier", target_position, barrier_time)
 	queue_free()
 
